@@ -1,0 +1,13 @@
+version: '3'
+services:
+  cloud-deploy:
+    build: ./docker
+    hostname: ${PROJECT-cloud-deploy}
+    # network_mode: host
+    environment:
+      - DEFAULT_HOST_LIST=./hosts
+      
+    volumes:
+      - ./data/.ssh:/tmp/.ssh
+      - ./:/cloud-deploy
+
