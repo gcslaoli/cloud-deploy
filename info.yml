@@ -1,0 +1,40 @@
+# 获取主机信息的 ansible playbook
+---
+- hosts: all
+  tasks:
+    - name: print ansible_distribution
+      debug:
+        msg: "{{ ansible_distribution }}"
+    - name: print ansible_distribution_version
+      debug:
+        msg: "{{ ansible_distribution_version }}"
+    - name: print ansible_distribution_release
+      debug:
+        msg: "{{ ansible_distribution_release }}"
+    - name: print ansible_distribution_major_version
+      debug:
+        msg: "{{ ansible_distribution_major_version }}"
+    - name: print ansible_os_family
+      debug:
+        msg: "{{ ansible_os_family }}"
+    - name: print ansible_pkg_mgr
+      debug:
+        msg: "{{ ansible_pkg_mgr }}"
+    - name: print ansible_service_mgr
+      debug:
+        msg: "{{ ansible_service_mgr }}"
+    - name: print ansible_user_id
+      debug:
+        msg: "{{ ansible_user_id }}"
+    - name: print ansible_user_uid
+      debug:
+        msg: "{{ ansible_user_uid }}"
+    - name: print ansible_user_gid
+      debug:
+        msg: "{{ ansible_user_gid }}"
+    - name: print ansible_user_dir
+      debug:
+        msg: "{{ ansible_user_dir }}"
+    - name: print ansible_architecture
+      debug:
+        msg: "{{ ansible_architecture }}"

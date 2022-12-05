@@ -1,0 +1,57 @@
+# Ubuntu虚拟机初始化脚本
+---
+- hosts: ubuntu
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+    # - name: set apt mirror
+    #   lineinfile:
+    #     path: /etc/apt/sources.list
+    #     regexp: '^deb'
+    #     line: 'deb http://mirrors.aliyun.com/ubuntu/ {{ ansible_distribution_release }} main restricted universe multiverse'
+    #     state: present
+    #   notify:
+    #     - update apt cache
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python3
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Install Docker from docker repository in Ubuntu arm64
+      apt_repository:
+        repo: deb [arch=arm64) https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+      when: ansible_architecture == "aarch64"
+      notify:
+        - update apt cache
+    - name: Install Docker from docker repository in Ubuntu amd64
+      apt_repository:
+        repo: deb [arch=amd64) https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+      when: ansible_architecture == "x86_64"
+      notify:
+        - update apt cache
+    - name: Install Docker
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-compose-plugin
+
+  handlers:
+    - name: update apt cache
+      apt:
+        update_cache: yes

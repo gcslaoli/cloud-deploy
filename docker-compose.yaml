@@ -8,6 +8,7 @@ services:
       - DEFAULT_HOST_LIST=./hosts
       
     volumes:
+      - ./hosts:/etc/ansible/hosts
       - ./data/.ssh:/tmp/.ssh
       - ./:/cloud-deploy
 
