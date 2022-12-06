@@ -5,7 +5,7 @@ services:
     hostname: ${PROJECT-cloud-deploy}
     # network_mode: host
     environment:
-      - DEFAULT_HOST_LIST=./hosts
+      - PROJECT=${PROJECT}
       
     volumes:
       - ./hosts:/etc/ansible/hosts

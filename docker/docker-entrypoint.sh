@@ -15,5 +15,16 @@ if [ -f /root/.ssh/id_rsa.pub ]; then
     chmod 644 /root/.ssh/id_rsa.pub
 fi
 
+# 如果 /root/.ssh/id_rsa 不存在，就生成一个
+if [ ! -f /root/.ssh/id_rsa ]; then
+    ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ''
+    echo "Generated SSH key:"
+    cat /root/.ssh/id_rsa.pub
+    # 复制到 /tmp/.ssh 目录下
+    cp /root/.ssh/id_rsa /tmp/.ssh/id_rsa
+    cp /root/.ssh/id_rsa.pub /tmp/.ssh/id_rsa.pub
+    echo "Copied SSH key to /tmp/.ssh"
+fi
+
 echo "... docker-entrypoint.sh script completed with PID $$ at $(date) ..."
 exec "$@"

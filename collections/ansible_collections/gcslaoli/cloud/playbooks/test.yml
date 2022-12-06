@@ -1,0 +1,6 @@
+---
+- hosts: all 
+  tasks:
+    - name: 引入docker role
+      include_role:
+        name: gcslaoli.cloud.docker

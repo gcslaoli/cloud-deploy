@@ -1,4 +1,4 @@
-192.168.64.11 ansible_ssh_user=ubuntu 
+192.168.64.20 ansible_ssh_user=ubuntu 
+localhost
 
 [ubuntu]
-192.168.64.13 ansible_ssh_user=ubuntu 

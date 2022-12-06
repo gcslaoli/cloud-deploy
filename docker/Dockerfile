@@ -6,7 +6,11 @@ RUN sed -i "s@http://archive.ubuntu.com@http://mirrors.aliyun.com@g" /etc/apt/so
     && sed -i "s@http://ports.ubuntu.com@http://mirrors.aliyun.com@g" /etc/apt/sources.list \
     && apt-get update && apt-get install -y python3-pip tzdata ssh\
     && pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
-    && pip install ansible
+    && pip install ansible \
+    && pip install argcomplete \
+    && mkdir -p /etc/bash_completion.d \
+    && activate-global-python-argcomplete \
+    && apt-get clean 
 # RUN mkdir -p /root/.ssh \
 #     && echo "Host *" > /root/.ssh/config \
 #     && echo "StrictHostKeyChecking no" >> /root/.ssh/config \
